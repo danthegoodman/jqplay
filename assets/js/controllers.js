@@ -42,6 +42,7 @@ angular.module('jqplay.controllers', []).controller('JqplayCtrl', function Jqpla
     $scope.result = "Loading...";
 
     jqplayService.run(jq).then(function successCallback(response) {
+      localStorage.lastRun = JSON.stringify(jq)
       $scope.result = response.data;
     }, function errorCallback(response) {
       $scope.result = response.data;
@@ -135,6 +136,7 @@ angular.module('jqplay.controllers', []).controller('JqplayCtrl', function Jqpla
   if (window.jq != null) {
     $scope.jq.j = window.jq.j;
     $scope.jq.q = window.jq.q;
+    $scope.jq.o = window.jq.o;
     $scope.run($scope.jq);
   }
 });

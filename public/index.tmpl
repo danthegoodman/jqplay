@@ -71,6 +71,11 @@
       window.jq = JSON.parse(#{.JQ});
     </script>
     #{ end }
+    <script>
+      if(localStorage.lastRun){
+        window.jq = JSON.parse(localStorage.lastRun);
+      }
+    </script>
     <script type="text/javascript" src="#{ .Asset "public/bower_components/ace-builds/src-min-noconflict/ace.js" }"></script>
     <script type="text/javascript" src="#{ .Asset "public/bower_components/ace-builds/src-min-noconflict/theme-github.js" }"></script>
     <script type="text/javascript" src="#{ .Asset "public/bower_components/ace-builds/src-min-noconflict/mode-jsoniq.js" }"></script>
