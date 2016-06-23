@@ -2,6 +2,7 @@ angular.module('jqplay.controllers', []).controller('JqplayCtrl', function Jqpla
   $scope.jq = {};
   $scope.jq.o = { "null-input": false, "slurp": false, "compact-output": false, "raw-input": false, "raw-output": false };
   $scope.result = "";
+  $scope.errorResult = null;
 
   $scope.editorLoaded = function(_editor) {
     _editor.setHighlightActiveLine(false);
@@ -32,10 +33,15 @@ angular.module('jqplay.controllers', []).controller('JqplayCtrl', function Jqpla
 
   $scope.run = function(jq) {
     jqplayService.run(jq).then(function successCallback(response) {
-      localStorage.lastRun = JSON.stringify(jq)
-      $scope.result = response.data;
+      if(/\nexit status \d+$/.test(response.data)){
+        $scope.errorResult = response.data
+      } else {
+        localStorage.lastRun = JSON.stringify(jq)
+        $scope.result = response.data;
+        $scope.errorResult = null
+      }
     }, function errorCallback(response) {
-      $scope.result = response.data;
+      $scope.errorResult = response.data;
     });
   };
 

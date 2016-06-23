@@ -105,6 +105,21 @@ header a {
   color: #777;
 }
 
+/* Errors */
+.result-error {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.result-error.ng-hide{
+  display: none;
+}
+
 /* ___ Footer styles ___ */
 
 footer {
