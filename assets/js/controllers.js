@@ -24,23 +24,13 @@ angular.module('jqplay.controllers', []).controller('JqplayCtrl', function Jqpla
 
   $scope.delayedRun = function(jq) {
     if ($scope.input.$valid) {
-      if ($scope.runTimeout != null) {
-        $timeout.cancel($scope.runTimeout);
-        $scope.runTimeout = null;
-      }
-
-      $scope.runTimeout = $timeout(function() {
-        $scope.run(jq);
-        $scope.runTimeout = null;
-      }, 1000);
+      $scope.run(jq);
     } else {
       $scope.result = "";
     }
   };
 
   $scope.run = function(jq) {
-    $scope.result = "Loading...";
-
     jqplayService.run(jq).then(function successCallback(response) {
       localStorage.lastRun = JSON.stringify(jq)
       $scope.result = response.data;
